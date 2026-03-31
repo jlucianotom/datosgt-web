@@ -3,339 +3,512 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DatosGT - Inteligencia de Negocios & Ciencia de Datos</title>
+  <title>DatosGT — Inteligencia de Negocios & Ciencia de Datos</title>
   <meta name="description" content="Transformamos tus datos en decisiones. Tableros, análisis de datos, inteligencia de negocios y capacitaciones en Power BI, Excel y Python en Guatemala." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --negro:   #191917;
-      --naranja: #FFAC33;
-      --azul:    #0066B3;
-      --gris:    #f4f4f2;
-      --texto:   #333330;
+      --bg:      #000000;
+      --bg2:     #0a0a0a;
+      --bg3:     #111111;
+      --border:  rgba(255,255,255,.08);
+      --text:    #ffffff;
+      --muted:   #888888;
+      --accent:  #ffffff;
+      --gold:    #c9a84c;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', sans-serif;
-      color: var(--texto);
-      background: #fff;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
     }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
 
     /* ── NAVBAR ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background: var(--negro);
+      z-index: 200;
+      padding: 0 6%;
+      height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 6%;
-      height: 68px;
-      z-index: 100;
-      box-shadow: 0 2px 16px rgba(0,0,0,.4);
+      border-bottom: 1px solid transparent;
+      transition: border-color .3s, background .3s;
+    }
+    nav.scrolled {
+      background: rgba(0,0,0,.92);
+      backdrop-filter: blur(12px);
+      border-bottom-color: var(--border);
     }
 
     .logo {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 900;
       letter-spacing: -1px;
+      color: #fff;
     }
-    .logo span { color: var(--naranja); }
+    .logo span { color: var(--gold); }
 
-    nav ul {
+    .nav-links {
       list-style: none;
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
+      align-items: center;
     }
-    nav ul a {
-      color: #ccc;
+    .nav-links a {
+      color: var(--muted);
       text-decoration: none;
-      font-size: .92rem;
+      font-size: .85rem;
       font-weight: 500;
+      letter-spacing: .5px;
+      text-transform: uppercase;
       transition: color .2s;
     }
-    nav ul a:hover { color: var(--naranja); }
+    .nav-links a:hover { color: #fff; }
 
-    .btn-nav {
-      background: var(--naranja);
-      color: var(--negro) !important;
-      padding: .45rem 1.1rem;
-      border-radius: 6px;
+    .btn-cta-nav {
+      background: #fff !important;
+      color: #000 !important;
+      padding: .5rem 1.3rem;
+      border-radius: 4px;
       font-weight: 700 !important;
+      font-size: .82rem !important;
+      text-transform: uppercase !important;
+      letter-spacing: 1px !important;
+      transition: background .2s, transform .15s !important;
     }
-    .btn-nav:hover { background: #e89a1f; color: var(--negro) !important; }
+    .btn-cta-nav:hover { background: var(--gold) !important; transform: translateY(-1px); }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all .3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0; bottom: 0;
+      background: #000;
+      z-index: 199;
+      padding: 3rem 8%;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.6rem;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
 
     /* ── HERO ── */
     #inicio {
       min-height: 100vh;
-      background: var(--negro);
       display: flex;
-      align-items: center;
-      padding: 100px 6% 60px;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 6% 80px;
       position: relative;
       overflow: hidden;
     }
 
-    #inicio::before {
-      content: '';
+    .hero-line {
       position: absolute;
-      top: -120px; right: -120px;
-      width: 520px; height: 520px;
-      background: radial-gradient(circle, rgba(0,102,179,.35) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-    #inicio::after {
-      content: '';
-      position: absolute;
-      bottom: -80px; left: 20%;
-      width: 380px; height: 380px;
-      background: radial-gradient(circle, rgba(255,172,51,.18) 0%, transparent 70%);
-      border-radius: 50%;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: .5;
     }
 
-    .hero-content {
-      max-width: 680px;
-      position: relative;
-      z-index: 2;
+    .hero-glow {
+      position: absolute;
+      top: 30%; right: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(201,168,76,.06) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
     }
 
-    .badge {
-      display: inline-block;
-      background: rgba(255,172,51,.15);
-      border: 1px solid var(--naranja);
-      color: var(--naranja);
-      font-size: .78rem;
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .72rem;
       font-weight: 600;
-      letter-spacing: 1.5px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      padding: .3rem .9rem;
-      border-radius: 50px;
-      margin-bottom: 1.4rem;
-    }
-
-    .hero-content h1 {
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.15;
-      margin-bottom: 1.2rem;
-    }
-    .hero-content h1 span { color: var(--naranja); }
-
-    .hero-content p {
-      font-size: 1.08rem;
-      color: #aaa;
-      line-height: 1.75;
+      color: var(--gold);
       margin-bottom: 2rem;
-      max-width: 540px;
+      opacity: 0;
+      animation: fadeUp .6s .2s forwards;
+    }
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--gold);
     }
 
-    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      max-width: 820px;
+      opacity: 0;
+      animation: fadeUp .6s .35s forwards;
+    }
+    .hero-h1 em {
+      font-style: normal;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,.4);
+    }
 
-    .btn-primary {
-      background: var(--naranja);
-      color: var(--negro);
-      padding: .85rem 2rem;
-      border-radius: 8px;
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 500px;
+      margin-top: 1.8rem;
+      opacity: 0;
+      animation: fadeUp .6s .5s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp .6s .65s forwards;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: #000;
+      padding: .9rem 2.2rem;
+      border-radius: 4px;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: .92rem;
       text-decoration: none;
+      letter-spacing: .3px;
       transition: background .2s, transform .15s;
       display: inline-block;
     }
-    .btn-primary:hover { background: #e89a1f; transform: translateY(-2px); }
+    .btn-white:hover { background: var(--gold); transform: translateY(-2px); }
 
-    .btn-secondary {
+    .btn-ghost {
       background: transparent;
-      color: #fff;
-      border: 2px solid rgba(255,255,255,.25);
-      padding: .85rem 2rem;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: .9rem 2.2rem;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: .92rem;
       text-decoration: none;
-      transition: border-color .2s, transform .15s;
+      transition: color .2s, border-color .2s, transform .15s;
       display: inline-block;
     }
-    .btn-secondary:hover { border-color: var(--naranja); color: var(--naranja); transform: translateY(-2px); }
+    .btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,.3); transform: translateY(-2px); }
 
-    /* stats strip */
-    .stats {
+    /* stats */
+    .hero-stats {
       display: flex;
-      gap: 2.5rem;
-      margin-top: 3rem;
+      gap: 3rem;
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
       flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp .6s .8s forwards;
     }
-    .stat-item { text-align: center; }
-    .stat-num {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--naranja);
+    .stat { }
+    .stat-n {
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -2px;
+      color: #fff;
+      display: block;
+      line-height: 1;
+    }
+    .stat-l {
+      font-size: .72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: .3rem;
       display: block;
     }
-    .stat-label { font-size: .8rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* ── SECTION BASE ── */
-    section { padding: 90px 6%; }
-
-    .section-tag {
-      display: inline-block;
-      font-size: .75rem;
-      font-weight: 700;
+    /* scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+      color: var(--muted);
+      font-size: .7rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--azul);
-      margin-bottom: .6rem;
+      animation: pulse 2s infinite;
+    }
+    .scroll-hint::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--muted), transparent);
     }
 
-    .section-title {
-      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
-      font-weight: 800;
-      color: var(--negro);
-      line-height: 1.2;
+    /* ── SECTION BASE ── */
+    section { padding: 100px 6%; }
+
+    .tag {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
       margin-bottom: 1rem;
     }
-    .section-title span { color: var(--naranja); }
 
-    .section-sub {
-      font-size: 1rem;
-      color: #666;
-      max-width: 560px;
-      line-height: 1.7;
-      margin-bottom: 3rem;
+    .sec-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .sec-title em { font-style: normal; color: var(--gold); }
+
+    .sec-sub {
+      font-size: .97rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 500px;
+      margin-bottom: 4rem;
     }
 
     /* ── SERVICIOS ── */
-    #servicios { background: var(--gris); }
+    #servicios { background: var(--bg2); }
 
-    .cards-grid {
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    .header-row .sec-sub { margin-bottom: 0; }
+
+    .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 2rem 1.7rem;
-      box-shadow: 0 2px 16px rgba(0,0,0,.07);
-      border-top: 4px solid transparent;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .card:hover { transform: translateY(-6px); box-shadow: 0 8px 32px rgba(0,0,0,.12); }
-    .card.naranja { border-top-color: var(--naranja); }
-    .card.azul    { border-top-color: var(--azul); }
-
-    .card-icon {
-      width: 52px; height: 52px;
+      gap: 1px;
+      border: 1px solid var(--border);
       border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.2rem;
+      overflow: hidden;
     }
-    .card-icon.bg-naranja { background: rgba(255,172,51,.15); }
-    .card-icon.bg-azul    { background: rgba(0,102,179,.12); }
 
-    .card h3 { font-size: 1.05rem; font-weight: 700; color: var(--negro); margin-bottom: .5rem; }
-    .card p  { font-size: .9rem; color: #666; line-height: 1.65; }
+    .service-item {
+      background: var(--bg2);
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background .25s;
+      cursor: default;
+    }
+    .service-item:hover { background: var(--bg3); }
+
+    .service-num {
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .service-item h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .6rem;
+    }
+    .service-item p {
+      font-size: .87rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
 
     /* ── TABLEROS ── */
-    #tableros { background: var(--negro); }
-    #tableros .section-tag { color: var(--naranja); }
-    #tableros .section-title { color: #fff; }
-    #tableros .section-sub   { color: #aaa; }
+    #tableros { background: var(--bg); }
 
-    .tableros-grid {
+    .tableros-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+    }
+
+    .tablero-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: 80px 1fr auto;
+      align-items: center;
+      padding: 2rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      gap: 2rem;
+      transition: background .2s;
+      cursor: default;
     }
+    .tablero-row:last-child { border-bottom: none; }
+    .tablero-row:hover { background: var(--bg3); }
 
-    .tablero-card {
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 14px;
-      padding: 2rem;
-      transition: background .2s, transform .2s;
-    }
-    .tablero-card:hover { background: rgba(255,172,51,.08); border-color: rgba(255,172,51,.3); transform: translateY(-4px); }
-
-    .tablero-num {
+    .t-num {
       font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--naranja);
-      opacity: .3;
-      margin-bottom: .5rem;
+      font-weight: 900;
+      color: var(--border);
+      letter-spacing: -2px;
     }
-    .tablero-card h3 { color: #fff; font-size: 1rem; font-weight: 700; margin-bottom: .5rem; }
-    .tablero-card p  { color: #888; font-size: .88rem; line-height: 1.65; }
+    .tablero-row:hover .t-num { color: var(--gold); transition: color .2s; }
+
+    .t-info h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: .3rem; }
+    .t-info p  { font-size: .87rem; color: var(--muted); line-height: 1.6; }
+
+    .t-badge {
+      background: rgba(201,168,76,.1);
+      border: 1px solid rgba(201,168,76,.2);
+      color: var(--gold);
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: .3rem .8rem;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+
+    .center-btn { text-align: center; }
 
     /* ── CURSOS ── */
-    #cursos { background: #fff; }
+    #cursos { background: var(--bg2); }
 
     .cursos-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.8rem;
+      gap: 1.5rem;
     }
 
     .curso-card {
-      border: 2px solid #eee;
-      border-radius: 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
       overflow: hidden;
-      transition: border-color .2s, transform .2s;
+      background: var(--bg3);
+      transition: border-color .25s, transform .25s;
     }
-    .curso-card:hover { border-color: var(--naranja); transform: translateY(-5px); }
+    .curso-card:hover { border-color: rgba(201,168,76,.4); transform: translateY(-4px); }
 
-    .curso-header {
-      padding: 1.8rem;
+    .curso-top {
+      padding: 2rem;
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       gap: 1rem;
     }
-    .curso-header.powerbi { background: linear-gradient(135deg, #0066B3, #0052a3); }
-    .curso-header.excel   { background: linear-gradient(135deg, #217346, #1a5c38); }
-    .curso-header.python  { background: linear-gradient(135deg, #3776AB, #2d5f8a); }
 
-    .curso-icon { font-size: 2.2rem; }
-    .curso-header h3 { color: #fff; font-size: 1.1rem; font-weight: 700; }
-    .curso-header p  { color: rgba(255,255,255,.75); font-size: .82rem; }
+    .curso-emoji {
+      width: 52px; height: 52px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.05);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
 
-    .curso-body { padding: 1.5rem 1.8rem; }
+    .curso-top h3 { font-size: 1.1rem; font-weight: 700; color: #fff; }
+    .curso-top p  { font-size: .8rem; color: var(--muted); margin-top: .2rem; }
+
+    .curso-body {
+      padding: 1.5rem 2rem;
+    }
     .curso-body ul { list-style: none; }
     .curso-body ul li {
-      font-size: .9rem;
-      color: #555;
-      padding: .4rem 0;
-      border-bottom: 1px solid #f0f0f0;
+      font-size: .87rem;
+      color: var(--muted);
+      padding: .55rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
       display: flex;
       align-items: flex-start;
-      gap: .6rem;
+      gap: .7rem;
     }
-    .curso-body ul li::before { content: "✓"; color: var(--naranja); font-weight: 800; flex-shrink: 0; }
-
-    .curso-cta {
-      display: block;
-      margin: 1.2rem 1.8rem 1.8rem;
-      background: var(--naranja);
-      color: var(--negro);
-      text-align: center;
-      padding: .75rem;
-      border-radius: 8px;
+    .curso-body ul li:last-child { border-bottom: none; }
+    .curso-body ul li::before {
+      content: "→";
+      color: var(--gold);
       font-weight: 700;
-      font-size: .92rem;
-      text-decoration: none;
-      transition: background .2s;
+      flex-shrink: 0;
+      margin-top: 1px;
     }
-    .curso-cta:hover { background: #e89a1f; }
+
+    .curso-footer {
+      padding: 1.2rem 2rem 2rem;
+    }
+    .curso-btn {
+      display: block;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: #fff;
+      text-align: center;
+      padding: .8rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: .88rem;
+      text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+    .curso-btn:hover { background: var(--gold); border-color: var(--gold); color: #000; }
 
     /* ── POR QUE ── */
-    #porque { background: var(--gris); }
+    #porque { background: var(--bg); }
 
     .porque-grid {
       display: grid;
@@ -343,134 +516,206 @@
       gap: 1.5rem;
     }
 
-    .porque-item {
-      text-align: center;
-      padding: 2rem 1.5rem;
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    .porque-card {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg2);
+      transition: border-color .25s;
     }
-    .porque-item .icon { font-size: 2.4rem; margin-bottom: 1rem; }
-    .porque-item h4 { font-weight: 700; color: var(--negro); margin-bottom: .5rem; }
-    .porque-item p  { font-size: .88rem; color: #666; line-height: 1.6; }
+    .porque-card:hover { border-color: rgba(201,168,76,.3); }
+
+    .porque-card .icon {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .porque-card h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .5rem;
+    }
+    .porque-card p {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
 
     /* ── CONTACTO ── */
-    #contacto { background: var(--negro); }
-    #contacto .section-tag { color: var(--naranja); }
-    #contacto .section-title { color: #fff; }
-    #contacto .section-sub   { color: #aaa; }
+    #contacto { background: var(--bg2); }
 
-    .contacto-wrapper {
+    .contacto-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
       align-items: start;
     }
 
-    .contacto-info { }
-    .contacto-info .info-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 1.8rem;
-    }
-    .info-icon {
-      width: 44px; height: 44px;
-      background: rgba(255,172,51,.15);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
-    .info-text p  { color: #aaa; font-size: .85rem; margin-bottom: .2rem; }
-    .info-text a  { color: #fff; font-weight: 600; text-decoration: none; font-size: 1rem; }
-    .info-text a:hover { color: var(--naranja); }
-    .info-text span { color: #fff; font-weight: 600; font-size: 1rem; }
+    .contact-info-list { display: flex; flex-direction: column; gap: 2rem; }
 
-    .whatsapp-btn {
-      display: flex;
+    .c-item {}
+    .c-label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: .4rem;
+    }
+    .c-value {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #fff;
+      text-decoration: none;
+    }
+    .c-value:hover { color: var(--gold); }
+
+    .wa-btn {
+      display: inline-flex;
       align-items: center;
       gap: .7rem;
-      background: #25D366;
-      color: #fff;
-      padding: 1rem 1.6rem;
-      border-radius: 10px;
+      background: #fff;
+      color: #000;
+      padding: .9rem 1.6rem;
+      border-radius: 6px;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: .9rem;
       text-decoration: none;
-      margin-top: 1.5rem;
-      width: fit-content;
+      margin-top: 2.5rem;
       transition: background .2s, transform .15s;
     }
-    .whatsapp-btn:hover { background: #1ebe5a; transform: translateY(-2px); }
+    .wa-btn:hover { background: var(--gold); transform: translateY(-2px); }
 
     /* form */
-    .contacto-form {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 16px;
-      padding: 2rem;
+    .form-box {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
     }
 
-    .form-group { margin-bottom: 1.2rem; }
-    .form-group label { display: block; color: #aaa; font-size: .85rem; font-weight: 500; margin-bottom: .4rem; }
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .fg { margin-bottom: 1.2rem; }
+    .fg label {
+      display: block;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .5rem;
+    }
+    .fg input,
+    .fg textarea,
+    .fg select {
       width: 100%;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
       color: #fff;
-      padding: .8rem 1rem;
-      border-radius: 8px;
-      font-size: .95rem;
+      padding: .85rem 1rem;
+      border-radius: 6px;
+      font-size: .92rem;
       font-family: inherit;
       outline: none;
       transition: border-color .2s;
+      -webkit-appearance: none;
     }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder { color: #555; }
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus { border-color: var(--naranja); }
-    .form-group select option { background: #222; }
-    .form-group textarea { resize: vertical; min-height: 110px; }
+    .fg input::placeholder,
+    .fg textarea::placeholder { color: #333; }
+    .fg input:focus,
+    .fg textarea:focus,
+    .fg select:focus { border-color: var(--gold); }
+    .fg select option { background: #111; }
+    .fg textarea { resize: vertical; min-height: 100px; }
 
-    .btn-form {
+    .btn-submit {
       width: 100%;
-      background: var(--naranja);
-      color: var(--negro);
+      background: #fff;
+      color: #000;
       border: none;
       padding: 1rem;
-      border-radius: 8px;
+      border-radius: 6px;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: .95rem;
       font-family: inherit;
       cursor: pointer;
+      letter-spacing: .5px;
       transition: background .2s;
+      margin-top: .5rem;
     }
-    .btn-form:hover { background: #e89a1f; }
+    .btn-submit:hover { background: var(--gold); }
 
     /* ── FOOTER ── */
     footer {
-      background: #0f0f0e;
-      padding: 2.5rem 6%;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2rem 6%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 1rem;
     }
-    footer .logo { font-size: 1.3rem; }
-    footer p { color: #555; font-size: .85rem; }
-    footer a { color: #555; text-decoration: none; }
-    footer a:hover { color: var(--naranja); }
+    footer p { font-size: .8rem; color: #333; }
+    footer a { color: #333; text-decoration: none; transition: color .2s; }
+    footer a:hover { color: var(--gold); }
+
+    /* ── FLOATING WA ── */
+    .float-wa {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 150;
+      width: 56px; height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.35);
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .float-wa:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 28px rgba(37,211,102,.5);
+    }
+    .float-wa svg { width: 26px; height: 26px; fill: #fff; }
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: .4; }
+      50% { opacity: 1; }
+    }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav ul { display: none; }
-      .contacto-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
-      .stats { gap: 1.5rem; }
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .contacto-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .tablero-row { grid-template-columns: 60px 1fr; }
+      .t-badge { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 70px 5%; }
+      .hero-stats { gap: 2rem; }
+      .header-row { flex-direction: column; align-items: flex-start; }
       footer { flex-direction: column; text-align: center; }
     }
   </style>
@@ -478,273 +723,316 @@
 <body>
 
 <!-- NAVBAR -->
-<nav>
+<nav id="nav">
   <div class="logo">Datos<span>GT</span></div>
-  <ul>
+  <ul class="nav-links">
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#tableros">Tableros</a></li>
     <li><a href="#cursos">Cursos</a></li>
-    <li><a href="#contacto" class="btn-nav">Contactar</a></li>
+    <li><a href="#contacto" class="btn-cta-nav">Contactar</a></li>
   </ul>
+  <div class="hamburger" id="hbg" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#servicios" onclick="toggleMenu()">Servicios</a>
+  <a href="#tableros" onclick="toggleMenu()">Tableros</a>
+  <a href="#cursos" onclick="toggleMenu()">Cursos</a>
+  <a href="#contacto" onclick="toggleMenu()">Contactar</a>
+</div>
 
 <!-- HERO -->
 <section id="inicio">
-  <div class="hero-content">
-    <div class="badge">Guatemala &mdash; Ciencia de Datos</div>
-    <h1>Transforma tus datos en <span>decisiones inteligentes</span></h1>
-    <p>
-      En DatosGT convertimos tus datos en ventajas competitivas. Tableros interactivos,
-      inteligencia de negocios y capacitaciones para que tu empresa tome decisiones
-      con claridad y confianza.
-    </p>
-    <div class="hero-btns">
-      <a href="#contacto" class="btn-primary">Solicitar cotizacion</a>
-      <a href="#servicios" class="btn-secondary">Ver servicios</a>
+  <div class="hero-line"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-tag">Guatemala &mdash; Ciencia de Datos</div>
+
+  <h1 class="hero-h1">
+    Convierte tus datos<br/>
+    en <em>decisiones</em><br/>
+    que crecen.
+  </h1>
+
+  <p class="hero-sub">
+    En DatosGT transformamos datos dispersos en ventajas competitivas reales.
+    Tableros, análisis e inteligencia de negocios para empresas guatemaltecas.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#contacto" class="btn-white">Solicitar cotización</a>
+    <a href="#servicios" class="btn-ghost">Ver servicios →</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-n">3+</span>
+      <span class="stat-l">Tableros creados</span>
     </div>
-    <div class="stats">
-      <div class="stat-item">
-        <span class="stat-num">3+</span>
-        <span class="stat-label">Tableros creados</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num">3</span>
-        <span class="stat-label">Cursos disponibles</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num">100%</span>
-        <span class="stat-label">Resultados reales</span>
-      </div>
+    <div class="stat">
+      <span class="stat-n">3</span>
+      <span class="stat-l">Cursos activos</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n">100%</span>
+      <span class="stat-l">Resultados reales</span>
     </div>
   </div>
+
+  <div class="scroll-hint">Scroll</div>
 </section>
 
 <!-- SERVICIOS -->
 <section id="servicios">
-  <div class="section-tag">Lo que hacemos</div>
-  <h2 class="section-title">Servicios de <span>datos e inteligencia</span></h2>
-  <p class="section-sub">
-    Ofrecemos soluciones completas para empresas que quieren aprovechar el poder de sus datos
-    y tomar mejores decisiones.
-  </p>
-  <div class="cards-grid">
-    <div class="card naranja">
-      <div class="card-icon bg-naranja">📊</div>
+  <div class="header-row reveal">
+    <div>
+      <span class="tag">Lo que hacemos</span>
+      <h2 class="sec-title">Servicios de <em>datos</em><br/>e inteligencia</h2>
+    </div>
+    <p class="sec-sub">
+      Soluciones completas para empresas que quieren aprovechar
+      el poder de sus datos y tomar mejores decisiones.
+    </p>
+  </div>
+
+  <div class="services-grid reveal">
+    <div class="service-item">
+      <div class="service-num">01</div>
+      <span class="service-icon">📊</span>
       <h3>Ciencia de Datos</h3>
-      <p>Aplicamos tecnicas estadisticas y modelos predictivos para descubrir patrones en tus datos y anticipar tendencias de negocio.</p>
+      <p>Modelos predictivos y técnicas estadísticas para descubrir patrones y anticipar tendencias en tu negocio.</p>
     </div>
-    <div class="card azul">
-      <div class="card-icon bg-azul">🧠</div>
+    <div class="service-item">
+      <div class="service-num">02</div>
+      <span class="service-icon">🧠</span>
       <h3>Inteligencia de Negocios</h3>
-      <p>Convertimos datos dispersos en informacion clara y accionable. KPIs, metricas clave y reportes ejecutivos automatizados.</p>
+      <p>KPIs, métricas clave y reportes ejecutivos automatizados. Información clara y accionable.</p>
     </div>
-    <div class="card naranja">
-      <div class="card-icon bg-naranja">🔍</div>
-      <h3>Analisis de Datos</h3>
-      <p>Exploramos, limpiamos y analizamos tus datos para encontrar las respuestas que tu empresa necesita tomar hoy.</p>
+    <div class="service-item">
+      <div class="service-num">03</div>
+      <span class="service-icon">🔍</span>
+      <h3>Análisis de Datos</h3>
+      <p>Exploramos, limpiamos y analizamos tus datos para encontrar las respuestas que tu empresa necesita hoy.</p>
     </div>
-    <div class="card azul">
-      <div class="card-icon bg-azul">📈</div>
-      <h3>Visualizacion</h3>
-      <p>Dashboards interactivos y reportes visuales que comunican la informacion de forma rapida, clara y atractiva.</p>
+    <div class="service-item">
+      <div class="service-num">04</div>
+      <span class="service-icon">📈</span>
+      <h3>Visualización</h3>
+      <p>Dashboards interactivos y reportes visuales que comunican información de forma rápida y atractiva.</p>
     </div>
   </div>
 </section>
 
 <!-- TABLEROS -->
 <section id="tableros">
-  <div class="section-tag">Nuestro trabajo</div>
-  <h2 class="section-title">Creacion de <span>tableros profesionales</span></h2>
-  <p class="section-sub">
-    Disenamos tableros a la medida de tu negocio. Conectados a tus fuentes de datos,
-    actualizados en tiempo real y listos para presentar.
+  <span class="tag reveal">Nuestro trabajo</span>
+  <h2 class="sec-title reveal">Tableros <em>profesionales</em><br/>a la medida</h2>
+  <p class="sec-sub reveal">
+    Conectados a tus fuentes de datos, actualizados en tiempo real
+    y listos para presentar ante cualquier equipo.
   </p>
-  <div class="tableros-grid">
-    <div class="tablero-card">
-      <div class="tablero-num">01</div>
-      <h3>Tablero de Ventas</h3>
-      <p>Monitorea ingresos, productos top, canales de venta y tendencias en tiempo real desde cualquier dispositivo.</p>
+
+  <div class="tableros-list reveal">
+    <div class="tablero-row">
+      <div class="t-num">01</div>
+      <div class="t-info">
+        <h3>Tablero de Ventas</h3>
+        <p>Ingresos, productos top, canales de venta y tendencias en tiempo real desde cualquier dispositivo.</p>
+      </div>
+      <span class="t-badge">Power BI</span>
     </div>
-    <div class="tablero-card">
-      <div class="tablero-num">02</div>
-      <h3>Tablero Financiero</h3>
-      <p>Controla flujo de caja, gastos, presupuesto vs real y margenes de rentabilidad con un solo vistazo.</p>
+    <div class="tablero-row">
+      <div class="t-num">02</div>
+      <div class="t-info">
+        <h3>Tablero Financiero</h3>
+        <p>Flujo de caja, gastos, presupuesto vs real y márgenes de rentabilidad con un solo vistazo.</p>
+      </div>
+      <span class="t-badge">Power BI</span>
     </div>
-    <div class="tablero-card">
-      <div class="tablero-num">03</div>
-      <h3>Tablero Operativo</h3>
-      <p>Eficiencia operativa, indicadores de produccion, tiempos y recursos para optimizar tus procesos internos.</p>
+    <div class="tablero-row">
+      <div class="t-num">03</div>
+      <div class="t-info">
+        <h3>Tablero Operativo</h3>
+        <p>Eficiencia operativa, indicadores de producción, tiempos y recursos para optimizar tus procesos.</p>
+      </div>
+      <span class="t-badge">Power BI</span>
     </div>
   </div>
-  <div style="margin-top: 2.5rem; text-align: center;">
-    <a href="#contacto" class="btn-primary">Quiero mi tablero personalizado</a>
+
+  <div class="center-btn reveal">
+    <a href="#contacto" class="btn-white">Quiero mi tablero personalizado</a>
   </div>
 </section>
 
 <!-- CURSOS -->
 <section id="cursos">
-  <div class="section-tag">Capacitacion</div>
-  <h2 class="section-title">Cursos para <span>dominar tus datos</span></h2>
-  <p class="section-sub">
-    Aprende las herramientas mas demandadas del mercado con clases practicas,
-    casos reales y acompanamiento personalizado.
+  <span class="tag reveal">Capacitación</span>
+  <h2 class="sec-title reveal">Domina tus <em>datos</em></h2>
+  <p class="sec-sub reveal">
+    Aprende las herramientas más demandadas del mercado con clases
+    prácticas, casos reales y acompañamiento personalizado.
   </p>
+
   <div class="cursos-grid">
 
-    <div class="curso-card">
-      <div class="curso-header powerbi">
-        <div class="curso-icon">📊</div>
+    <div class="curso-card reveal">
+      <div class="curso-top">
+        <div class="curso-emoji">📊</div>
         <div>
           <h3>Power BI</h3>
-          <p>Desde cero hasta dashboards profesionales</p>
+          <p>De cero a dashboards profesionales</p>
         </div>
       </div>
       <div class="curso-body">
         <ul>
-          <li>Conexion a multiples fuentes de datos</li>
+          <li>Conexión a múltiples fuentes de datos</li>
           <li>Modelado de datos y relaciones</li>
-          <li>DAX: formulas y medidas avanzadas</li>
-          <li>Diseno de reportes interactivos</li>
-          <li>Publicacion y compartir en la nube</li>
+          <li>DAX: fórmulas y medidas avanzadas</li>
+          <li>Diseño de reportes interactivos</li>
+          <li>Publicación en la nube</li>
         </ul>
       </div>
-      <a href="https://wa.me/50248024133?text=Hola%2C%20me%20interesa%20el%20curso%20de%20Power%20BI" target="_blank" class="curso-cta">Inscribirme ahora</a>
+      <div class="curso-footer">
+        <a href="https://wa.me/50248024133?text=Hola%2C%20me%20interesa%20el%20curso%20de%20Power%20BI" target="_blank" class="curso-btn">Inscribirme →</a>
+      </div>
     </div>
 
-    <div class="curso-card">
-      <div class="curso-header excel">
-        <div class="curso-icon">📗</div>
+    <div class="curso-card reveal">
+      <div class="curso-top">
+        <div class="curso-emoji">📗</div>
         <div>
           <h3>Excel Avanzado</h3>
-          <p>Analisis y automatizacion de datos</p>
+          <p>Análisis y automatización de datos</p>
         </div>
       </div>
       <div class="curso-body">
         <ul>
-          <li>Tablas dinamicas y segmentadores</li>
-          <li>Formulas avanzadas: BUSCARV, INDEX, MATCH</li>
-          <li>Automatizacion con macros y VBA</li>
-          <li>Dashboards y graficos dinamicos</li>
+          <li>Tablas dinámicas y segmentadores</li>
+          <li>BUSCARV, INDEX, MATCH y más</li>
+          <li>Automatización con macros y VBA</li>
+          <li>Dashboards y gráficos dinámicos</li>
           <li>Power Query para limpieza de datos</li>
         </ul>
       </div>
-      <a href="https://wa.me/50248024133?text=Hola%2C%20me%20interesa%20el%20curso%20de%20Excel" target="_blank" class="curso-cta">Inscribirme ahora</a>
+      <div class="curso-footer">
+        <a href="https://wa.me/50248024133?text=Hola%2C%20me%20interesa%20el%20curso%20de%20Excel" target="_blank" class="curso-btn">Inscribirme →</a>
+      </div>
     </div>
 
-    <div class="curso-card">
-      <div class="curso-header python">
-        <div class="curso-icon">🐍</div>
+    <div class="curso-card reveal">
+      <div class="curso-top">
+        <div class="curso-emoji">🐍</div>
         <div>
           <h3>Python para Datos</h3>
-          <p>Analisis y visualizacion con Python</p>
+          <p>Análisis y visualización con Python</p>
         </div>
       </div>
       <div class="curso-body">
         <ul>
           <li>Fundamentos de Python aplicados a datos</li>
-          <li>Pandas: manipulacion y limpieza</li>
-          <li>Visualizacion con Matplotlib y Seaborn</li>
-          <li>Estadistica descriptiva e inferencial</li>
+          <li>Pandas: manipulación y limpieza</li>
+          <li>Matplotlib y Seaborn</li>
+          <li>Estadística descriptiva e inferencial</li>
           <li>Proyectos con datos reales de negocio</li>
         </ul>
       </div>
-      <a href="https://wa.me/50248024133?text=Hola%2C%20me%20interesa%20el%20curso%20de%20Python" target="_blank" class="curso-cta">Inscribirme ahora</a>
+      <div class="curso-footer">
+        <a href="https://wa.me/50248024133?text=Hola%2C%20me%20interesa%20el%20curso%20de%20Python" target="_blank" class="curso-btn">Inscribirme →</a>
+      </div>
     </div>
 
   </div>
 </section>
 
-<!-- POR QUE NOSOTROS -->
+<!-- POR QUE -->
 <section id="porque">
-  <div class="section-tag">Por que elegirnos</div>
-  <h2 class="section-title">Tu negocio merece <span>datos que funcionen</span></h2>
-  <p class="section-sub">No vendemos tecnologia por vender. Entendemos tu negocio y entregamos soluciones que generan valor real.</p>
+  <span class="tag reveal">Por qué elegirnos</span>
+  <h2 class="sec-title reveal">Tu negocio merece<br/><em>datos que funcionen</em></h2>
+  <p class="sec-sub reveal">No vendemos tecnología por vender. Entendemos tu negocio y entregamos soluciones que generan valor real.</p>
+
   <div class="porque-grid">
-    <div class="porque-item">
+    <div class="porque-card reveal">
       <div class="icon">🎯</div>
       <h4>Enfoque en resultados</h4>
-      <p>Cada proyecto tiene un objetivo claro. Medimos el impacto de cada solucion que entregamos.</p>
+      <p>Cada proyecto tiene un objetivo claro. Medimos el impacto de cada solución que entregamos.</p>
     </div>
-    <div class="porque-item">
+    <div class="porque-card reveal">
       <div class="icon">🇬🇹</div>
       <h4>Conocemos Guatemala</h4>
-      <p>Experiencia con empresas locales, entendemos el contexto del mercado guatemalteco.</p>
+      <p>Experiencia con empresas locales. Entendemos el contexto del mercado guatemalteco.</p>
     </div>
-    <div class="porque-item">
+    <div class="porque-card reveal">
       <div class="icon">⚡</div>
-      <h4>Entrega rapida</h4>
-      <p>Trabajamos con metodologias agiles para entregar valor en el menor tiempo posible.</p>
+      <h4>Entrega rápida</h4>
+      <p>Metodologías ágiles para entregar valor en el menor tiempo posible.</p>
     </div>
-    <div class="porque-item">
+    <div class="porque-card reveal">
       <div class="icon">🤝</div>
-      <h4>Acompanamiento continuo</h4>
-      <p>No desaparecemos tras entregar. Te apoyamos para que saques el maximo provecho.</p>
+      <h4>Acompañamiento continuo</h4>
+      <p>No desaparecemos tras entregar. Te apoyamos para que saques el máximo provecho.</p>
     </div>
   </div>
 </section>
 
 <!-- CONTACTO -->
 <section id="contacto">
-  <div class="section-tag">Hablemos</div>
-  <h2 class="section-title">Empieza a transformar <span>tus datos hoy</span></h2>
-  <p class="section-sub">Cuentanos tu proyecto y te respondemos en menos de 24 horas con una propuesta personalizada.</p>
+  <span class="tag reveal">Hablemos</span>
+  <h2 class="sec-title reveal">Empieza a transformar<br/><em>tus datos hoy</em></h2>
+  <p class="sec-sub reveal">Cuéntanos tu proyecto y te respondemos en menos de 24 horas con una propuesta personalizada.</p>
 
-  <div class="contacto-wrapper">
+  <div class="contacto-grid">
 
-    <div class="contacto-info">
-      <div class="info-item">
-        <div class="info-icon">📱</div>
-        <div class="info-text">
-          <p>WhatsApp / Telefono</p>
-          <a href="tel:+50248024133">+502 4802-4133</a>
-        </div>
+    <div class="contact-info-list reveal">
+      <div class="c-item">
+        <span class="c-label">WhatsApp / Teléfono</span>
+        <a href="tel:+50248024133" class="c-value">+502 4802-4133</a>
       </div>
-      <div class="info-item">
-        <div class="info-icon">✉️</div>
-        <div class="info-text">
-          <p>Correo electronico</p>
-          <a href="mailto:jlucianotom@gmail.com">jlucianotom@gmail.com</a>
-        </div>
+      <div class="c-item">
+        <span class="c-label">Correo electrónico</span>
+        <a href="mailto:jlucianotom@gmail.com" class="c-value">jlucianotom@gmail.com</a>
       </div>
-      <div class="info-item">
-        <div class="info-icon">🌎</div>
-        <div class="info-text">
-          <p>Ubicacion</p>
-          <span>Guatemala</span>
-        </div>
+      <div class="c-item">
+        <span class="c-label">Ubicación</span>
+        <span class="c-value">Guatemala</span>
       </div>
-      <a href="https://wa.me/50248024133?text=Hola%2C%20me%20interesa%20conocer%20sus%20servicios%20de%20datos" target="_blank" class="whatsapp-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+
+      <a href="https://wa.me/50248024133?text=Hola%2C%20me%20interesa%20conocer%20sus%20servicios%20de%20datos" target="_blank" class="wa-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Escribir por WhatsApp
       </a>
     </div>
 
-    <form class="contacto-form" onsubmit="enviarFormulario(event)">
-      <div class="form-group">
-        <label>Nombre completo</label>
-        <input type="text" id="nombre" placeholder="Tu nombre" required />
+    <form class="form-box reveal" onsubmit="enviarFormulario(event)">
+      <div class="form-row">
+        <div class="fg">
+          <label>Nombre</label>
+          <input type="text" id="nombre" placeholder="Tu nombre" required />
+        </div>
+        <div class="fg">
+          <label>Correo</label>
+          <input type="email" id="email" placeholder="tu@correo.com" required />
+        </div>
       </div>
-      <div class="form-group">
-        <label>Correo electronico</label>
-        <input type="email" id="email" placeholder="tu@correo.com" required />
-      </div>
-      <div class="form-group">
+      <div class="fg">
         <label>Me interesa...</label>
         <select id="servicio">
           <option value="">Selecciona un servicio</option>
-          <option>Creacion de tablero</option>
+          <option>Creación de tablero</option>
           <option>Curso de Power BI</option>
           <option>Curso de Excel</option>
           <option>Curso de Python</option>
-          <option>Analisis de datos</option>
+          <option>Análisis de datos</option>
           <option>Otro</option>
         </select>
       </div>
-      <div class="form-group">
+      <div class="fg">
         <label>Mensaje</label>
-        <textarea id="mensaje" placeholder="Cuentame sobre tu proyecto o consulta..."></textarea>
+        <textarea id="mensaje" placeholder="Cuéntame sobre tu proyecto..."></textarea>
       </div>
-      <button type="submit" class="btn-form">Enviar mensaje &rarr;</button>
+      <button type="submit" class="btn-submit">Enviar mensaje →</button>
     </form>
 
   </div>
@@ -757,17 +1045,44 @@
   <p><a href="mailto:jlucianotom@gmail.com">jlucianotom@gmail.com</a></p>
 </footer>
 
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/50248024133?text=Hola%2C%20me%20interesa%20conocer%20sus%20servicios" target="_blank" class="float-wa" title="Escríbenos por WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
 <script>
+  // Navbar scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Formulario → WhatsApp
   function enviarFormulario(e) {
     e.preventDefault();
     const nombre   = document.getElementById('nombre').value;
     const email    = document.getElementById('email').value;
     const servicio = document.getElementById('servicio').value;
     const mensaje  = document.getElementById('mensaje').value;
-
     const texto = `Hola, soy ${nombre} (${email}). Me interesa: ${servicio}. ${mensaje}`;
-    const url   = `https://wa.me/50248024133?text=${encodeURIComponent(texto)}`;
-    window.open(url, '_blank');
+    window.open(`https://wa.me/50248024133?text=${encodeURIComponent(texto)}`, '_blank');
   }
 </script>
 
