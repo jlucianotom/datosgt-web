@@ -541,6 +541,163 @@
       line-height: 1.7;
     }
 
+    /* ── IMPACTO (industrias / países) ── */
+    #impacto { background: var(--bg3); }
+
+    .impacto-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .impacto-group h3 {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+    }
+
+    .tag-pill {
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      color: #ccc;
+      font-size: .82rem;
+      font-weight: 500;
+      padding: .4rem .9rem;
+      border-radius: 50px;
+      transition: border-color .2s, color .2s;
+    }
+    .tag-pill:hover { border-color: rgba(201,168,76,.4); color: var(--gold); }
+
+    /* ── COMUNIDAD ── */
+    #comunidad { background: var(--bg); }
+
+    .comunidad-box {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .com-left {
+      padding: 3.5rem;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .com-left .tag { margin-bottom: 0; }
+
+    .com-left h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.2;
+    }
+    .com-left h2 em { font-style: normal; color: var(--gold); }
+
+    .com-left p {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .com-perks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+    }
+    .com-perks li {
+      font-size: .9rem;
+      color: #ccc;
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+    }
+    .com-perks li::before {
+      content: "✓";
+      color: var(--gold);
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .btn-nas {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: var(--gold);
+      color: #000;
+      padding: 1rem 2rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: .92rem;
+      text-decoration: none;
+      width: fit-content;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn-nas:hover { opacity: .88; transform: translateY(-2px); }
+
+    .com-right {
+      padding: 3.5rem;
+      background: var(--bg3);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+
+    .com-stat-big {
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -3px;
+      color: #fff;
+      line-height: 1;
+    }
+    .com-stat-big span { color: var(--gold); }
+
+    .com-right p {
+      font-size: .92rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 340px;
+    }
+
+    .com-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: .5rem;
+    }
+    .com-tag {
+      background: rgba(201,168,76,.1);
+      border: 1px solid rgba(201,168,76,.2);
+      color: var(--gold);
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: .3rem .8rem;
+      border-radius: 50px;
+    }
+
+    @media (max-width: 900px) {
+      .impacto-cols { grid-template-columns: 1fr; gap: 2.5rem; }
+      .comunidad-box { grid-template-columns: 1fr; }
+      .com-left { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+
     /* ── CONTACTO ── */
     #contacto { background: var(--bg2); }
 
@@ -729,6 +886,7 @@
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#tableros">Tableros</a></li>
     <li><a href="#cursos">Cursos</a></li>
+    <li><a href="#comunidad">Comunidad</a></li>
     <li><a href="#contacto" class="btn-cta-nav">Contactar</a></li>
   </ul>
   <div class="hamburger" id="hbg" onclick="toggleMenu()">
@@ -741,6 +899,7 @@
   <a href="#servicios" onclick="toggleMenu()">Servicios</a>
   <a href="#tableros" onclick="toggleMenu()">Tableros</a>
   <a href="#cursos" onclick="toggleMenu()">Cursos</a>
+  <a href="#comunidad" onclick="toggleMenu()">Comunidad</a>
   <a href="#contacto" onclick="toggleMenu()">Contactar</a>
 </div>
 
@@ -758,8 +917,8 @@
   </h1>
 
   <p class="hero-sub">
-    En DatosGT transformamos datos dispersos en ventajas competitivas reales.
-    Tableros, análisis e inteligencia de negocios para empresas guatemaltecas.
+    Dashboards que automatizan reportes, presentaciones que convencen y análisis que
+    ahorran horas de trabajo. Más de 250 tableros entregados en 8+ industrias y 6+ países.
   </p>
 
   <div class="hero-actions">
@@ -769,16 +928,20 @@
 
   <div class="hero-stats">
     <div class="stat">
-      <span class="stat-n">3+</span>
+      <span class="stat-n">250+</span>
       <span class="stat-l">Tableros creados</span>
     </div>
     <div class="stat">
-      <span class="stat-n">3</span>
-      <span class="stat-l">Cursos activos</span>
+      <span class="stat-n">700+</span>
+      <span class="stat-l">Emprendedores impactados</span>
     </div>
     <div class="stat">
-      <span class="stat-n">100%</span>
-      <span class="stat-l">Resultados reales</span>
+      <span class="stat-n">8+</span>
+      <span class="stat-l">Industrias</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n">6+</span>
+      <span class="stat-l">Países</span>
     </div>
   </div>
 
@@ -974,6 +1137,89 @@
       <h4>Acompañamiento continuo</h4>
       <p>No desaparecemos tras entregar. Te apoyamos para que saques el máximo provecho.</p>
     </div>
+  </div>
+</section>
+
+<!-- IMPACTO -->
+<section id="impacto">
+  <span class="tag reveal">Alcance global</span>
+  <h2 class="sec-title reveal">Experiencia en <em>negocios reales</em><br/>alrededor del mundo</h2>
+  <p class="sec-sub reveal">
+    Dashboards que ahorran tiempo, automatizan reportes y presentan datos con claridad
+    para tomar decisiones en segundos, no en días.
+  </p>
+
+  <div class="impacto-cols reveal">
+    <div class="impacto-group">
+      <h3>+8 Industrias</h3>
+      <div class="tag-list">
+        <span class="tag-pill">Retail & Comercio</span>
+        <span class="tag-pill">Finanzas & Banca</span>
+        <span class="tag-pill">Salud & Clínicas</span>
+        <span class="tag-pill">Educación</span>
+        <span class="tag-pill">Logística & Supply Chain</span>
+        <span class="tag-pill">Manufactura</span>
+        <span class="tag-pill">Bienes Raíces</span>
+        <span class="tag-pill">Tecnología & SaaS</span>
+        <span class="tag-pill">Emprendimiento</span>
+      </div>
+    </div>
+    <div class="impacto-group">
+      <h3>+6 Países</h3>
+      <div class="tag-list">
+        <span class="tag-pill">🇬🇹 Guatemala</span>
+        <span class="tag-pill">🇲🇽 México</span>
+        <span class="tag-pill">🇸🇻 El Salvador</span>
+        <span class="tag-pill">🇭🇳 Honduras</span>
+        <span class="tag-pill">🇨🇷 Costa Rica</span>
+        <span class="tag-pill">🇺🇸 Estados Unidos</span>
+        <span class="tag-pill">🇨🇴 Colombia</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMUNIDAD -->
+<section id="comunidad">
+  <div class="comunidad-box reveal">
+
+    <div class="com-left">
+      <span class="tag">Comunidad DatosGT</span>
+      <h2>Aprende análisis<br/>de datos <em>gratis</em></h2>
+      <p>
+        Únete a nuestra comunidad en nas.io y accede a clases gratuitas de Power BI,
+        Excel, Python y análisis de datos. Más de 700 emprendedores ya están aprendiendo.
+      </p>
+
+      <ul class="com-perks">
+        <li>Clases en vivo gratuitas cada semana</li>
+        <li>Recursos y plantillas descargables</li>
+        <li>Comunidad activa de emprendedores</li>
+        <li>Casos prácticos de negocios reales</li>
+        <li>Acceso a grabaciones anteriores</li>
+      </ul>
+
+      <a href="https://nas.io/datosgt" target="_blank" class="btn-nas">
+        Unirme gratis a la comunidad →
+      </a>
+    </div>
+
+    <div class="com-right">
+      <div class="com-stat-big">700<span>+</span></div>
+      <p>
+        Emprendedores y profesionales que ya transformaron su forma de trabajar
+        con datos gracias a DatosGT.
+      </p>
+      <div class="com-tags">
+        <span class="com-tag">Power BI</span>
+        <span class="com-tag">Excel</span>
+        <span class="com-tag">Python</span>
+        <span class="com-tag">Dashboards</span>
+        <span class="com-tag">Automatización</span>
+        <span class="com-tag">Análisis</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
