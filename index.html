@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DatosGT — Inteligencia de Negocios & Ciencia de Datos</title>
+  <title>CCDatos — Inteligencia de Negocios & Ciencia de Datos</title>
   <meta name="description" content="Transformamos tus datos en decisiones. Tableros, análisis de datos, inteligencia de negocios y capacitaciones en Power BI, Excel y Python en Guatemala." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
@@ -875,13 +875,38 @@
       .header-row { flex-direction: column; align-items: flex-start; }
       footer { flex-direction: column; text-align: center; }
     }
+
+    /* DASHBOARD MOCKUPS */
+    .tableros-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .tablero-card { background: #0d0d0d; border: 1px solid rgba(255,255,255,.08); border-radius: 12px; overflow: hidden; transition: transform .3s, border-color .3s; }
+    .tablero-card:hover { transform: translateY(-6px); border-color: rgba(201,168,76,.4); }
+    .mock-screen { background: #080808; padding: 1rem; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .mock-kpis { display: flex; gap: .5rem; margin-bottom: .7rem; }
+    .mock-kpi { flex: 1; background: rgba(255,255,255,.04); border-radius: 6px; padding: .4rem .5rem; }
+    .mock-kpi-val { font-size: .78rem; font-weight: 700; color: #c9a84c; }
+    .mock-kpi-lbl { font-size: .55rem; color: #444; margin-top: 2px; }
+    .mock-bar { display: flex; align-items: flex-end; gap: 5px; height: 65px; }
+    .mock-bar span { flex: 1; border-radius: 3px 3px 0 0; opacity: .85; }
+    .tablero-info { padding: 1rem 1.2rem 1.2rem; }
+    .tablero-info h3 { font-size: .95rem; font-weight: 700; color: #fff; margin-bottom: .3rem; }
+    .tablero-info p { font-size: .78rem; color: #666; line-height: 1.5; }
+    .t-badge-sm { display: inline-block; margin-top: .6rem; font-size: .65rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #c9a84c; border: 1px solid rgba(201,168,76,.3); padding: .2rem .5rem; border-radius: 20px; }
+    /* URGENCIA CURSOS */
+    .curso-urgencia { background: rgba(201,168,76,.07); border: 1px solid rgba(201,168,76,.2); border-radius: 8px; padding: .65rem .9rem; margin: .8rem 0 0; }
+    .urgencia-fecha { font-size: .7rem; color: #c9a84c; font-weight: 600; margin-bottom: .4rem; }
+    .cupos-bar { height: 5px; background: rgba(255,255,255,.08); border-radius: 10px; overflow: hidden; }
+    .cupos-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg,#c9a84c,#e8c46a); }
+    .cupos-txt { font-size: .65rem; color: #777; margin-top: .3rem; }
+    .cupos-txt strong { color: #e8c46a; }
+    @media (max-width: 900px) { .tableros-grid { grid-template-columns: 1fr; } }
+
   </style>
 </head>
 <body>
 
 <!-- NAVBAR -->
 <nav id="nav">
-  <div class="logo">Datos<span>GT</span></div>
+  <div class="logo">CC<span>Datos</span></div>
   <ul class="nav-links">
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#tableros">Tableros</a></li>
@@ -922,7 +947,7 @@
   </p>
 
   <div class="hero-actions">
-    <a href="#contacto" class="btn-white">Solicitar cotización</a>
+    <a href="https://wa.me/50248024133?text=Hola%2C%20quiero%20agendar%20una%20llamada%20gratuita%20de%2015%20minutos" target="_blank" class="btn-white">Llamada gratis de 15 min</a>
     <a href="#servicios" class="btn-ghost">Ver servicios →</a>
   </div>
 
@@ -998,30 +1023,79 @@
     y listos para presentar ante cualquier equipo.
   </p>
 
-  <div class="tableros-list reveal">
-    <div class="tablero-row">
-      <div class="t-num">01</div>
-      <div class="t-info">
+  <div class="tableros-grid reveal">
+    <div class="tablero-card">
+      <div class="mock-screen">
+        <div class="mock-kpis">
+          <div class="mock-kpi"><div class="mock-kpi-val">Q 847K</div><div class="mock-kpi-lbl">Ingresos mes</div></div>
+          <div class="mock-kpi"><div class="mock-kpi-val">+18%</div><div class="mock-kpi-lbl">Crecimiento</div></div>
+          <div class="mock-kpi"><div class="mock-kpi-val">1,240</div><div class="mock-kpi-lbl">Transacciones</div></div>
+        </div>
+        <div class="mock-bar">
+          <span style="height:40%;background:linear-gradient(180deg,#c9a84c,#8a6e2f)"></span>
+          <span style="height:55%;background:linear-gradient(180deg,#c9a84c,#8a6e2f)"></span>
+          <span style="height:45%;background:linear-gradient(180deg,#c9a84c,#8a6e2f)"></span>
+          <span style="height:70%;background:linear-gradient(180deg,#c9a84c,#8a6e2f)"></span>
+          <span style="height:60%;background:linear-gradient(180deg,#c9a84c,#8a6e2f)"></span>
+          <span style="height:85%;background:linear-gradient(180deg,#c9a84c,#8a6e2f)"></span>
+          <span style="height:75%;background:linear-gradient(180deg,#c9a84c,#8a6e2f)"></span>
+          <span style="height:95%;background:linear-gradient(180deg,#c9a84c,#8a6e2f)"></span>
+          <span style="height:100%;background:linear-gradient(180deg,#e8c46a,#c9a84c)"></span>
+        </div>
+      </div>
+      <div class="tablero-info">
         <h3>Tablero de Ventas</h3>
         <p>Ingresos, productos top, canales de venta y tendencias en tiempo real desde cualquier dispositivo.</p>
+        <span class="t-badge-sm">Power BI</span>
       </div>
-      <span class="t-badge">Power BI</span>
     </div>
-    <div class="tablero-row">
-      <div class="t-num">02</div>
-      <div class="t-info">
+    <div class="tablero-card">
+      <div class="mock-screen">
+        <div class="mock-kpis">
+          <div class="mock-kpi"><div class="mock-kpi-val">84%</div><div class="mock-kpi-lbl">Margen neto</div></div>
+          <div class="mock-kpi"><div class="mock-kpi-val">Q 92K</div><div class="mock-kpi-lbl">Gastos</div></div>
+          <div class="mock-kpi"><div class="mock-kpi-val">+5%</div><div class="mock-kpi-lbl">ROI</div></div>
+        </div>
+        <div class="mock-bar">
+          <span style="height:60%;background:linear-gradient(180deg,#4c8ec9,#2a5a8a)"></span>
+          <span style="height:75%;background:linear-gradient(180deg,#4c8ec9,#2a5a8a)"></span>
+          <span style="height:50%;background:linear-gradient(180deg,#c94c4c,#8a2a2a)"></span>
+          <span style="height:80%;background:linear-gradient(180deg,#4c8ec9,#2a5a8a)"></span>
+          <span style="height:65%;background:linear-gradient(180deg,#4c8ec9,#2a5a8a)"></span>
+          <span style="height:40%;background:linear-gradient(180deg,#c94c4c,#8a2a2a)"></span>
+          <span style="height:90%;background:linear-gradient(180deg,#4cc97a,#2a8a4c)"></span>
+          <span style="height:85%;background:linear-gradient(180deg,#4cc97a,#2a8a4c)"></span>
+        </div>
+      </div>
+      <div class="tablero-info">
         <h3>Tablero Financiero</h3>
         <p>Flujo de caja, gastos, presupuesto vs real y márgenes de rentabilidad con un solo vistazo.</p>
+        <span class="t-badge-sm">Power BI</span>
       </div>
-      <span class="t-badge">Power BI</span>
     </div>
-    <div class="tablero-row">
-      <div class="t-num">03</div>
-      <div class="t-info">
+    <div class="tablero-card">
+      <div class="mock-screen">
+        <div class="mock-kpis">
+          <div class="mock-kpi"><div class="mock-kpi-val">97%</div><div class="mock-kpi-lbl">Eficiencia</div></div>
+          <div class="mock-kpi"><div class="mock-kpi-val">4.2h</div><div class="mock-kpi-lbl">Ciclo prom.</div></div>
+          <div class="mock-kpi"><div class="mock-kpi-val">312</div><div class="mock-kpi-lbl">Unidades/día</div></div>
+        </div>
+        <div class="mock-bar">
+          <span style="height:90%;background:linear-gradient(180deg,#c9a84c,#8a6e2f)"></span>
+          <span style="height:95%;background:linear-gradient(180deg,#c9a84c,#8a6e2f)"></span>
+          <span style="height:88%;background:linear-gradient(180deg,#c9a84c,#8a6e2f)"></span>
+          <span style="height:97%;background:linear-gradient(180deg,#e8c46a,#c9a84c)"></span>
+          <span style="height:92%;background:linear-gradient(180deg,#c9a84c,#8a6e2f)"></span>
+          <span style="height:85%;background:linear-gradient(180deg,#c9a84c,#8a6e2f)"></span>
+          <span style="height:99%;background:linear-gradient(180deg,#e8c46a,#c9a84c)"></span>
+          <span style="height:93%;background:linear-gradient(180deg,#c9a84c,#8a6e2f)"></span>
+        </div>
+      </div>
+      <div class="tablero-info">
         <h3>Tablero Operativo</h3>
         <p>Eficiencia operativa, indicadores de producción, tiempos y recursos para optimizar tus procesos.</p>
+        <span class="t-badge-sm">Power BI</span>
       </div>
-      <span class="t-badge">Power BI</span>
     </div>
   </div>
 
@@ -1059,7 +1133,12 @@
         </ul>
       </div>
       <div class="curso-footer">
-        <a href="https://wa.me/50248024133?text=Hola%2C%20me%20interesa%20el%20curso%20de%20Power%20BI" target="_blank" class="curso-btn">Inscribirme →</a>
+        <div class="curso-urgencia">
+          <div class="urgencia-fecha">Inicio: 14 abr 2026 · Online en vivo · 4 semanas</div>
+          <div class="cupos-bar"><div class="cupos-fill" style="width:70%"></div></div>
+          <div class="cupos-txt"><strong>Solo 3 cupos disponibles</strong> de 10</div>
+        </div>
+        <a href="https://wa.me/50248024133?text=Hola%2C%20quiero%20reservar%20mi%20cupo%20para%20el%20curso%20de%20Power%20BI%20que%20inicia%20el%2014%20de%20abril" target="_blank" class="curso-btn">Reservar mi cupo →</a>
       </div>
     </div>
 
@@ -1081,7 +1160,12 @@
         </ul>
       </div>
       <div class="curso-footer">
-        <a href="https://wa.me/50248024133?text=Hola%2C%20me%20interesa%20el%20curso%20de%20Excel" target="_blank" class="curso-btn">Inscribirme →</a>
+        <div class="curso-urgencia">
+          <div class="urgencia-fecha">Inicio: 21 abr 2026 · Online en vivo · 3 semanas</div>
+          <div class="cupos-bar"><div class="cupos-fill" style="width:50%"></div></div>
+          <div class="cupos-txt"><strong>5 cupos disponibles</strong> de 10</div>
+        </div>
+        <a href="https://wa.me/50248024133?text=Hola%2C%20quiero%20reservar%20mi%20cupo%20para%20el%20curso%20de%20Excel%20que%20inicia%20el%2021%20de%20abril" target="_blank" class="curso-btn">Reservar mi cupo →</a>
       </div>
     </div>
 
@@ -1103,7 +1187,12 @@
         </ul>
       </div>
       <div class="curso-footer">
-        <a href="https://wa.me/50248024133?text=Hola%2C%20me%20interesa%20el%20curso%20de%20Python" target="_blank" class="curso-btn">Inscribirme →</a>
+        <div class="curso-urgencia">
+          <div class="urgencia-fecha">Inicio: 28 abr 2026 · Online en vivo · 5 semanas</div>
+          <div class="cupos-bar"><div class="cupos-fill" style="width:30%"></div></div>
+          <div class="cupos-txt"><strong>7 cupos disponibles</strong> de 10</div>
+        </div>
+        <a href="https://wa.me/50248024133?text=Hola%2C%20quiero%20reservar%20mi%20cupo%20para%20el%20curso%20de%20Python%20que%20inicia%20el%2028%20de%20abril" target="_blank" class="curso-btn">Reservar mi cupo →</a>
       </div>
     </div>
 
@@ -1184,7 +1273,7 @@
   <div class="comunidad-box reveal">
 
     <div class="com-left">
-      <span class="tag">Comunidad DatosGT</span>
+      <span class="tag">Comunidad CCDatos</span>
       <h2>Aprende análisis<br/>de datos <em>gratis</em></h2>
       <p>
         Únete a nuestra comunidad en nas.io y accede a clases gratuitas de Power BI,
@@ -1208,7 +1297,7 @@
       <div class="com-stat-big">700<span>+</span></div>
       <p>
         Emprendedores y profesionales que ya transformaron su forma de trabajar
-        con datos gracias a DatosGT.
+        con datos gracias a CCDatos.
       </p>
       <div class="com-tags">
         <span class="com-tag">Power BI</span>
@@ -1286,8 +1375,8 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="logo">Datos<span>GT</span></div>
-  <p>&copy; 2025 DatosGT. Todos los derechos reservados.</p>
+  <div class="logo">CC<span>Datos</span></div>
+  <p>&copy; 2025 CCDatos. Todos los derechos reservados.</p>
   <p><a href="mailto:jlucianotom@gmail.com">jlucianotom@gmail.com</a></p>
 </footer>
 
